@@ -1,9 +1,11 @@
 function Footer() {
   return (
-    <div>
-      <p>&copy; 2024 Dawson Woolley</p>
-      <p>Over 1256 Recipes</p>
-    </div>
+    <footer className="flex justify-between p-4 ">
+      <span className="font-bold">&copy; DKW</span>
+      <span>
+        Over <b>1256</b> Recipes!
+      </span>
+    </footer>
   );
 }
 
