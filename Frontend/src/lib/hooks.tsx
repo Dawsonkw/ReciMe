@@ -12,9 +12,9 @@ type RecipeApiResponse = {
   description: string;
   ingredients: string;
   instructions: string;
-  servings: number;
-  prepTime: number;
-  cookTime: number;
+  servings: number | string;
+  prep_time: number | string;
+  cook_time: number | string;
   category: string;
   difficulty: string;
 };
