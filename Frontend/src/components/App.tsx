@@ -1,3 +1,4 @@
+import AddRecipe from "./addRecipe";
 import Footer from "./footer";
 import Header from "./header";
 
@@ -7,6 +8,7 @@ function App() {
   return (
     <main className="bg-[#fffffe] text-black h-screen">
       <Header />
+      <AddRecipe />
       <Recipes />
 
       <Footer />
