@@ -8,14 +8,14 @@ const AddRecipe: React.FC = () => {
     id: 0,
     title: "",
     description: "",
-    // image: "",
+    image: "",
     ingredients: "",
     instructions: "",
-    // difficulty: "",
+    difficulty: "",
     servings: "",
     prep_time: "",
     cook_time: "",
-    // category: "",
+    category: "",
   });
 
   const handleChange = (
@@ -33,7 +33,7 @@ const AddRecipe: React.FC = () => {
 
     const recipeData = {
       ...formData,
-      //   image: { plate },
+      image: "https://via.placeholder.com/150",
     };
     await addRecipe(recipeData);
   };
@@ -81,20 +81,28 @@ const AddRecipe: React.FC = () => {
           required
         />
       </div>
-      {/* <div>
-        <label htmlFor="difficulty">Difficulty:</label>
-        <select
+      <div>
+        <label htmlFor="title">Category:</label>
+        <input
+          type="text"
+          name="category"
+          id="category"
+          onChange={handleChange}
+          value={formData.category}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="title">Difficulty:</label>
+        <input
+          type="text"
           name="difficulty"
           id="difficulty"
           onChange={handleChange}
           value={formData.difficulty}
           required
-        >
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-      </div> */}
+        />
+      </div>
       <div>
         <label htmlFor="servings">Servings:</label>
         <input
@@ -106,19 +114,6 @@ const AddRecipe: React.FC = () => {
           required
         />
       </div>
-      {/* <div>
-        <label htmlFor="category">Main Dish or salad</label>
-        <select
-          name="category"
-          id="category"
-          onChange={handleChange}
-          value={formData.category}
-          required
-        >
-          <option value="main">Main Dish</option>
-          <option value="salad">Salad</option>
-        </select>
-      </div> */}
       <div>
         <label htmlFor="prep_time">Prep Time:</label>
         <input
