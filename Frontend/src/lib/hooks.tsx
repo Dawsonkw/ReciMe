@@ -4,20 +4,7 @@
 
 import { useEffect, useState } from "react";
 import { BASE_API_URL } from "./constants";
-
-type RecipeApiResponse = {
-  id: number;
-  image: string;
-  title: string;
-  description: string;
-  ingredients: string;
-  instructions: string;
-  servings: number | string;
-  prep_time: number | string;
-  cook_time: number | string;
-  category: string;
-  difficulty: string;
-};
+import { RecipeApiResponse } from "./types";
 
 export const useFetchRecipes = () => {
   const [recipes, setRecipes] = useState<RecipeApiResponse[]>([]);

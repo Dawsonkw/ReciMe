@@ -6,7 +6,7 @@ import Recipes from "./recipes";
 
 function App() {
   return (
-    <main className="bg-[#fffffe] text-black h-screen">
+    <main className="bg-gray-200 text-black h-screen">
       <Header />
       <AddRecipe />
       <Recipes />

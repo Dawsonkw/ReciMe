@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { useAddRecipe } from "../lib/hooks";
+import { RecipeApiResponse } from "../lib/types";
 
-const AddRecipe: React.FC = () => {
+type AddRecipeProps = {
+  onAddRecipe: (newRecipe: RecipeApiResponse) => void;
+};
+
+const AddRecipe: React.FC<AddRecipeProps> = ({ onAddRecipe }) => {
   const { addRecipe, loading, error, success } = useAddRecipe();
 
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     id: 0,
     title: "",
     description: "",
@@ -16,7 +21,9 @@ const AddRecipe: React.FC = () => {
     prep_time: "",
     cook_time: "",
     category: "",
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -35,12 +42,22 @@ const AddRecipe: React.FC = () => {
       ...formData,
       image: "https://via.placeholder.com/150",
     };
-    await addRecipe(recipeData);
+    try {
+      const newRecipe = await addRecipe(recipeData);
+      onAddRecipe(newRecipe);
+
+      setFormData(initialFormData);
+    } catch (error) {
+      console.error("Error adding recipe", error);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 flex flex-col items-center mx-auto border-2 border-gray-500 p-4 rounded-md shadow-lg bg-recipeAccent max-w-[30%]"
+    >
+      <div className="l">
         <label htmlFor="title">Title:</label>
         <input
           type="text"
@@ -137,7 +154,11 @@ const AddRecipe: React.FC = () => {
         />
       </div>
 
-      <button type="submit" disabled={loading}>
+      <button
+        type="submit"
+        disabled={loading}
+        className="border rounded-lg border-gray-500 bg-blue-500 p-2 text-white active:bg-blue-700"
+      >
         {loading ? "Adding Recipe..." : "Add Recipe"}
       </button>
 
