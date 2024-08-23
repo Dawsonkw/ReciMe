@@ -41,6 +41,7 @@ const AddRecipe: React.FC<AddRecipeProps> = ({ onAddRecipe }) => {
     const recipeData = {
       ...formData,
       image: "https://via.placeholder.com/150",
+      servings: parseInt(formData.servings),
     };
     try {
       const newRecipe = await addRecipe(recipeData);

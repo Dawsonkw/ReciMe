@@ -1,7 +1,3 @@
-// Endpoint: http://127.0.0.1:8000/api/recipes/
-// GET request to get all recipes
-// POST request to create a new recipe
-
 import { useEffect, useState } from "react";
 import { BASE_API_URL } from "./constants";
 import { RecipeApiResponse } from "./types";

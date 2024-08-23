@@ -7,7 +7,7 @@ export type RecipeApiResponse = {
   instructions: string;
   difficulty: string;
   servings: number;
-  prep_time: number;
-  cook_time: number;
+  prep_time: number | string;
+  cook_time: number | string;
   category: string;
 };

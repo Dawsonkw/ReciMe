@@ -8,7 +8,11 @@ function App() {
   return (
     <main className="bg-gray-200 text-black h-screen">
       <Header />
-      <AddRecipe />
+      <AddRecipe
+        onAddRecipe={function (): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
       <Recipes />
 
       <Footer />

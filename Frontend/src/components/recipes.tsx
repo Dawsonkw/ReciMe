@@ -1,24 +1,10 @@
 import { useEffect, useState } from "react";
 import { useFetchRecipes } from "../lib/hooks";
-import Recipe from "./recipe";
-
-type Recipe = {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  ingredients: string;
-  instructions: string;
-  difficulty: string;
-  servings: number | undefined;
-  prep_time: number;
-  cook_time: number;
-  category: string;
-};
+import { RecipeApiResponse } from "../lib/types";
 
 function Recipes() {
   const { recipes: initialRecipes, loading, error } = useFetchRecipes();
-  const [recipeList, setRecipeList] = useState<Recipe[]>([]);
+  const [recipeList, setRecipeList] = useState<RecipeApiResponse[]>([]);
 
   useEffect(() => {
     if (initialRecipes) {
