@@ -6,7 +6,7 @@ type AddRecipeProps = {
   onAddRecipe: (newRecipe: RecipeApiResponse) => void;
 };
 
-const AddRecipe: React.FC<AddRecipeProps> = ({ onAddRecipe }) => {
+function AddRecipe({ onAddRecipe }: AddRecipeProps) {
   const { addRecipe, loading, error, success } = useAddRecipe();
 
   const initialFormData = {
@@ -37,136 +37,219 @@ const AddRecipe: React.FC<AddRecipeProps> = ({ onAddRecipe }) => {
   };
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     const recipeData = {
       ...formData,
-      image: "https://via.placeholder.com/150",
+      image: "https://via.placeholder.com/650",
       servings: parseInt(formData.servings),
     };
     try {
       const newRecipe = await addRecipe(recipeData);
       onAddRecipe(newRecipe);
-
       setFormData(initialFormData);
     } catch (error) {
       console.error("Error adding recipe", error);
     }
+    window.location.reload();
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 flex flex-col items-center mx-auto border-2 border-gray-500 p-4 rounded-md shadow-lg bg-recipeAccent max-w-[30%]"
+      className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-xl shadow-xl border-2 border-gray-500"
     >
-      <div className="l">
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          onChange={handleChange}
-          value={formData.title}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="description">Description:</label>
-        <textarea
-          name="description"
-          id="description"
-          onChange={handleChange}
-          value={formData.description}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="ingredients">Ingredients:</label>
-        <textarea
-          name="ingredients"
-          id="ingredients"
-          onChange={handleChange}
-          value={formData.ingredients}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="instructions">Instructions:</label>
-        <textarea
-          name="instructions"
-          id="instructions"
-          onChange={handleChange}
-          value={formData.instructions}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="title">Category:</label>
-        <input
-          type="text"
-          name="category"
-          id="category"
-          onChange={handleChange}
-          value={formData.category}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="title">Difficulty:</label>
-        <input
-          type="text"
-          name="difficulty"
-          id="difficulty"
-          onChange={handleChange}
-          value={formData.difficulty}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="servings">Servings:</label>
-        <input
-          type="number"
-          name="servings"
-          id="servings"
-          onChange={handleChange}
-          value={formData.servings}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="prep_time">Prep Time:</label>
-        <input
-          type="number"
-          name="prep_time"
-          id="prep_time"
-          onChange={handleChange}
-          value={formData.prep_time}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="cook_time">Cook Time:</label>
-        <input
-          type="number"
-          name="cook_time"
-          id="cook_time"
-          onChange={handleChange}
-          value={formData.cook_time}
-          required
-        />
+      <h1 className="text-gray-700 text-lg font-semibold ">
+        Submit your favorite recipe to reciMe or browse our catalog of user
+        submitted recipes!
+      </h1>
+      <div className="space-y-6">
+        <div>
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Title
+          </label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Recipe Title"
+            onChange={handleChange}
+            value={formData.title}
+            required
+            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Description
+          </label>
+          <textarea
+            name="description"
+            id="description"
+            placeholder="Write a short description of the recipe"
+            onChange={handleChange}
+            value={formData.description}
+            required
+            rows={3}
+            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="ingredients"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Ingredients
+          </label>
+          <textarea
+            name="ingredients"
+            id="ingredients"
+            placeholder="Enter ingredients separated by commas"
+            onChange={handleChange}
+            value={formData.ingredients}
+            required
+            rows={4}
+            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="instructions"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Instructions
+          </label>
+          <textarea
+            name="instructions"
+            id="instructions"
+            placeholder="Enter instructions for the recipe"
+            onChange={handleChange}
+            value={formData.instructions}
+            required
+            rows={4}
+            className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label
+              htmlFor="category"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Category
+            </label>
+            <input
+              type="text"
+              name="category"
+              id="category"
+              placeholder="Main Course, Dessert, etc."
+              onChange={handleChange}
+              value={formData.category}
+              required
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="difficulty"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Difficulty
+            </label>
+            <input
+              type="text"
+              name="difficulty"
+              id="difficulty"
+              placeholder="Easy, Medium, Hard"
+              onChange={handleChange}
+              value={formData.difficulty}
+              required
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-4">
+          <div>
+            <label
+              htmlFor="servings"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Servings
+            </label>
+            <input
+              type="number"
+              name="servings"
+              id="servings"
+              onChange={handleChange}
+              value={formData.servings}
+              required
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="prep_time"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Prep Time (min)
+            </label>
+            <input
+              type="number"
+              name="prep_time"
+              id="prep_time"
+              onChange={handleChange}
+              value={formData.prep_time}
+              required
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="cook_time"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Cook Time (min)
+            </label>
+            <input
+              type="number"
+              name="cook_time"
+              id="cook_time"
+              onChange={handleChange}
+              value={formData.cook_time}
+              required
+              className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+        </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="border rounded-lg border-gray-500 bg-blue-500 p-2 text-white active:bg-blue-700"
-      >
-        {loading ? "Adding Recipe..." : "Add Recipe"}
-      </button>
+      <div className="mt-6">
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {loading ? "Adding Recipe..." : "Add Recipe"}
+        </button>
+      </div>
 
-      {error && <p className="text-red-500">{error}</p>}
-      {success && <p className="text-green-500">Recipe added successfully!</p>}
+      {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+      {success && (
+        <p className="mt-2 text-sm text-green-600">
+          Recipe added successfully!
+        </p>
+      )}
     </form>
   );
-};
+}
 
 export default AddRecipe;

@@ -13,7 +13,7 @@ export const useFetchRecipes = () => {
         setLoading(true);
         const response = await fetch(BASE_API_URL);
         if (!response.ok) {
-          const errorData = await response.text;
+          const errorData = response.text;
           throw new Error(`API request failed ${errorData}`);
         }
         const data: RecipeApiResponse[] = await response.json();

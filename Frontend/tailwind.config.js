@@ -10,6 +10,10 @@ export default {
       backgroundColor: {
         recipeAccent: "#ffffffe6",
       },
+      fontFamily: {
+        recipeFont: ["Roboto", "sans-serif"],
+      },
+      scrollbar: ["rounded"],
     },
   },
   plugins: [],
