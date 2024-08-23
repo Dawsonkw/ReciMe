@@ -10,7 +10,7 @@ function App() {
       <Header />
       <AddRecipe
         onAddRecipe={function (): void {
-          throw new Error("Function not implemented.");
+          throw new Error("Error adding recipe");
         }}
       />
       <Recipes />

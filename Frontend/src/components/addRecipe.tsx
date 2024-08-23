@@ -9,6 +9,7 @@ type AddRecipeProps = {
 function AddRecipe({ onAddRecipe }: AddRecipeProps) {
   const { addRecipe, loading, error, success } = useAddRecipe();
 
+  ///////empty form data///////
   const initialFormData = {
     id: 0,
     title: "",
@@ -25,6 +26,7 @@ function AddRecipe({ onAddRecipe }: AddRecipeProps) {
 
   const [formData, setFormData] = useState(initialFormData);
 
+  ///////Handlers for form input///////
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -49,13 +51,14 @@ function AddRecipe({ onAddRecipe }: AddRecipeProps) {
     } catch (error) {
       console.error("Error adding recipe", error);
     }
+
     window.location.reload();
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-xl shadow-xl border-2 border-gray-500"
+      className="max-w-[35%] mx-auto mt-8 p-6 bg-white rounded-xl shadow-xl border-2 border-gray-500"
     >
       <h1 className="text-gray-700 text-lg font-semibold ">
         Submit your favorite recipe to reciMe or browse our catalog of user
@@ -236,7 +239,7 @@ function AddRecipe({ onAddRecipe }: AddRecipeProps) {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? "Adding Recipe..." : "Add Recipe"}
         </button>

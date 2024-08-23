@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BASE_API_URL } from "./constants";
 import { RecipeApiResponse } from "./types";
 
+// GET request to API to fetch recipes
 export const useFetchRecipes = () => {
   const [recipes, setRecipes] = useState<RecipeApiResponse[]>([]);
   const [loading, setLoading] = useState(false);
@@ -31,6 +32,7 @@ export const useFetchRecipes = () => {
   return { recipes, loading, error };
 };
 
+// POST request to API to add a recipe
 export const useAddRecipe = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
