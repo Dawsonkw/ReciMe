@@ -18,20 +18,25 @@ class Command(BaseCommand):
                 recipes = json.load(file)
 
             for recipe_data in recipes:
-                Recipe.objects.create(
+                recipe, created = Recipe.objects.update_or_create(
                     title=recipe_data['title'],
-                    image=recipe_data['image'],
-                    description=recipe_data['description'],
-                    ingredients=recipe_data['ingredients'],
-                    instructions=recipe_data['instructions'],
-                    servings=recipe_data['servings'],
-                    prep_time=recipe_data['prepTime'],
-                    cook_time=recipe_data['cookTime'],
-                    category=recipe_data['category'],
-                    difficulty=recipe_data['difficulty']
+                    defaults={
+                        'image': recipe_data['image'],
+                        'description': recipe_data['description'],
+                        'ingredients': recipe_data['ingredients'],
+                        'instructions': recipe_data['instructions'],
+                        'servings': recipe_data['servings'],
+                        'prep_time': recipe_data['prepTime'],
+                        'cook_time': recipe_data['cookTime'],
+                        'category': recipe_data['category'],
+                        'difficulty': recipe_data['difficulty']
+                    }
                 )
+                if created:
+                    self.stdout.write(self.style.SUCCESS(f'Successfully created recipe: {recipe.title}'))
+                else:
+                    self.stdout.write(self.style.SUCCESS(f'Successfully updated recipe: {recipe.title}'))
 
-            self.stdout.write(self.style.SUCCESS('Successfully loaded recipes'))
         except FileNotFoundError:
             self.stdout.write(self.style.ERROR(f'Could not find file at {json_file_path}'))
         except json.JSONDecodeError:

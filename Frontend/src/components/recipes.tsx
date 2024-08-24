@@ -42,7 +42,7 @@ function Recipes() {
 
   return (
     <div>
-      <div className="flex justify-center items-center mt-4 mb-6">
+      <div className="flex justify-center items-center mt-6 ">
         <button
           onClick={handlePrevPage}
           disabled={currentPage === 1}
@@ -87,8 +87,11 @@ function Recipes() {
               </h2>
               <p className="text-wrap leading-normal border-b-4">
                 {recipe.description}
+                <p className="w-[30%] flex mx-auto justify-center items-center  p-4 m-4 bg-gray-200 bottom-10 ">
+                  {recipe.category}
+                </p>
               </p>
-              <ul className="leading-normal">
+              <ul className="leading-normal mb-4">
                 {recipe.ingredients.split(",").map((ingredient, index) => (
                   <li key={index}>
                     <span className="bullet">&#8226;</span> {ingredient.trim()}
@@ -98,10 +101,10 @@ function Recipes() {
               <p className="border-b-4">{recipe.instructions}</p>
               <div className="leading-8">
                 <div className="flex justify-between space-x-2">
-                  <p className="">Difficulty: {recipe.difficulty} </p>
-                  <p className=""> {recipe.servings} servings </p>
+                  <p>Difficulty: {recipe.difficulty} </p>
+                  <p> {recipe.servings} servings </p>
                 </div>
-                <p className="flex justify-center"> {recipe.category}</p>
+                <div className="p-4 "></div>
                 <div className="flex justify-between">
                   <p>Prep time: {recipe.prep_time} minutes</p>
                   <p>Cook time: {recipe.cook_time} minutes</p>

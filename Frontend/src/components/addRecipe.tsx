@@ -60,7 +60,7 @@ function AddRecipe({ onAddRecipe }: AddRecipeProps) {
       onSubmit={handleSubmit}
       className="max-w-[35%] mx-auto mt-8 p-6 bg-white rounded-xl shadow-xl border-2 border-gray-500"
     >
-      <h1 className="text-gray-700 text-lg font-semibold ">
+      <h1 className="text-gray-700 text-[16px] mb-4 font-semibold ">
         Submit your favorite recipe to reciMe or browse our catalog of user
         submitted recipes!
       </h1>
