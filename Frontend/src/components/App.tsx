@@ -10,8 +10,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddRecipe = (newRecipe: RecipeApiResponse) => {
-    // Handle adding recipe logic here, e.g., updating state or refetching recipes
-    console.log("New recipe added:", newRecipe);
+    console.log("Recipe added:", newRecipe);
     setIsModalOpen(false);
   };
 
