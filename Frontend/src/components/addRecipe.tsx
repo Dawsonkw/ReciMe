@@ -4,10 +4,13 @@ import { RecipeApiResponse } from "../lib/types";
 
 type AddRecipeProps = {
   onAddRecipe: (newRecipe: RecipeApiResponse) => void;
+  onClose: () => void;
 };
 
-function AddRecipe({ onAddRecipe }: AddRecipeProps) {
-  const { addRecipe, loading, error, success } = useAddRecipe();
+function AddRecipe({ onAddRecipe, onClose }: AddRecipeProps) {
+  const { addRecipe, loading, error, success } = useAddRecipe(() => {
+    onClose();
+  });
 
   ///////empty form data///////
   const initialFormData = {
@@ -37,6 +40,7 @@ function AddRecipe({ onAddRecipe }: AddRecipeProps) {
       [e.target.name]: e.target.value,
     });
   };
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const recipeData = {
@@ -46,19 +50,20 @@ function AddRecipe({ onAddRecipe }: AddRecipeProps) {
     };
     try {
       const newRecipe = await addRecipe(recipeData);
-      onAddRecipe(newRecipe);
-      setFormData(initialFormData);
+      if (newRecipe) {
+        onAddRecipe(newRecipe);
+        setFormData(initialFormData);
+        window.location.reload();
+      }
     } catch (error) {
       console.error("Error adding recipe", error);
     }
-
-    window.location.reload();
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-[35%] mx-auto mt-8 p-6 bg-white rounded-xl shadow-xl border-2 border-gray-500"
+      className=" mx-auto mt-8 p-6 bg-white rounded-xl shadow-xl border-2 border-gray-500"
     >
       <h1 className="text-gray-700 text-[16px] mb-4 font-semibold ">
         Submit your favorite recipe to reciMe or browse our catalog of user

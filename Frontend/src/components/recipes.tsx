@@ -85,12 +85,12 @@ function Recipes() {
               <h2 className="justify-center items-center text-4xl text-center leading-normal">
                 {recipe.title}
               </h2>
-              <p className="text-wrap leading-normal border-b-4">
+              <div className="text-wrap leading-normal border-b-4">
                 {recipe.description}
                 <p className="w-[30%] flex mx-auto justify-center items-center  p-4 m-4 bg-gray-200 bottom-10 ">
                   {recipe.category}
                 </p>
-              </p>
+              </div>
               <ul className="leading-normal mb-4">
                 {recipe.ingredients.split(",").map((ingredient, index) => (
                   <li key={index}>

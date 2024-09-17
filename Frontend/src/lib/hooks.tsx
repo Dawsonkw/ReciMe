@@ -33,7 +33,7 @@ export const useFetchRecipes = () => {
 };
 
 // POST request to API to add a recipe
-export const useAddRecipe = () => {
+export const useAddRecipe = (onSuccess?: () => void) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -42,7 +42,6 @@ export const useAddRecipe = () => {
     setLoading(true);
     setError(null);
     setSuccess(false);
-
     try {
       const response = await fetch(BASE_API_URL, {
         method: "POST",
@@ -55,15 +54,19 @@ export const useAddRecipe = () => {
         const errorData = await response.text();
         throw new Error(`API request failed ${errorData}`);
       }
-
       const data = await response.json();
       setSuccess(true);
-      setLoading(false);
+      if (onSuccess) {
+        onSuccess();
+      }
       return data;
     } catch (error) {
       console.error("Error adding recipe", error);
       setError(error instanceof Error ? error.message : "Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
+
   return { addRecipe, loading, error, success };
 };
